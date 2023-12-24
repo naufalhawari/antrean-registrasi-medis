@@ -18,10 +18,12 @@ class ClinicServer:
     def dequeue(self):
         while True:
             time.sleep(QUEUE_TIME)
+            print("UPDATING QUEUES...")
             for clinic_id in self.klinik_status.keys():
                 for i in range(len(self.klinik_status[clinic_id]["queue_wait_time"])):
                     self.klinik_status[clinic_id]["queue_wait_time"][i] = max([0, self.klinik_status[clinic_id]["queue_wait_time"][i] - QUEUE_TIME])
-            print(self.klinik_status)
+                print(f'{self.klinik_status[clinic_id]["name"]}: last queue waiting time = {max([0] + self.klinik_status[clinic_id]["queue_wait_time"])}')
+            
 
             
 
@@ -33,6 +35,7 @@ class ClinicServer:
         self.klinik_status[clinic_id]["queue_patients"].append(patient_info)
 
         last_queue_wait_time = max(self.klinik_status[clinic_id]["queue_wait_time"] + [0])
+        
         self.klinik_status[clinic_id]["queue_wait_time"].append(last_queue_wait_time + QUEUE_TIME)
 
         

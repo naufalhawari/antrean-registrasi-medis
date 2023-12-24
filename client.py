@@ -19,12 +19,12 @@ class ClinicClient:
     def get_queue_status(self, clinic_id):
         status = self.server.get_queue_status(clinic_id)
         print(f"{status}")
-
+    
     def get_menu(self):
         print(self.server.get_menu())
 
 if __name__ == "__main__":
-    server_address = "http://192.168.0.101:8000"  # Replace <server-ip> with the actual IP address of the server device
+    server_address = "http://127.0.0.1:8000"  
     client = ClinicClient(server_address)
 
 
